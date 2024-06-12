@@ -20,11 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 logs/
 log/
-
-# Ignore images
-*.png
-*.jpg
-*.jpeg
+archive/
 
 # Ignore text editor backup and swap files
 *~
@@ -38,6 +34,7 @@ log/
 *.so
 *.elf
 *.ko
+*.cache
 
 # Linker output
 *.ilk
