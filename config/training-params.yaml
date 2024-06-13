@@ -1,6 +1,6 @@
-img_size: 320
+img_size: 416
 batch_size: 16
-epochs: 10
+epochs: 20
 data: config/boat.yaml
 weights: yolov5s.pt
 project: runs/train
