@@ -1,0 +1,15 @@
+path: ../data/boat-dataset
+train: images/train
+val: images/val
+
+nc: 8
+#names: ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat', 'kayak', 'paper boat', 'sailboat']
+names:
+  0: cruise ship
+  1: ferry boat
+  2: freight boat
+  3: gondola
+  4: inflatable boat
+  5: kayak
+  6: paper boat
+  7: sailboat
