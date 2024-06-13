@@ -3,7 +3,6 @@ train: images/train
 val: images/val
 
 nc: 8
-#names: ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat', 'kayak', 'paper boat', 'sailboat']
 names:
   0: cruise ship
   1: ferry boat
@@ -13,3 +12,4 @@ names:
   5: kayak
   6: paper boat
   7: sailboat
+  8: buoy
