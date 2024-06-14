@@ -1,5 +1,5 @@
 import torch
-from pathlib import Path
+import os
 import cv2
 import argparse
 import random
@@ -29,11 +29,11 @@ def detect_boats(image_path):
 
 
 def detect_random_images(directory):
-    image_files = list(Path(directory).glob('*.jpg'))
+    image_files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith('.jpg')]
     while True:
         image_path = random.choice(image_files)
-        image = cv2.imread(str(image_path))
-        results = model(str(image_path))
+        image = cv2.imread(image_path)
+        results = model(image_path)
         predictions = results.xyxy[0].numpy()
         image_with_boxes = draw_boxes_cv2(image, predictions)
         cv2.imshow('Detected Boats', image_with_boxes)
@@ -45,7 +45,8 @@ def detect_random_images(directory):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Detect boats in images using YOLOv5.')
-    parser.add_argument('--image', type=str, help='Path to a specific image file')
+    parser.add_argument('--image', type=str,
+                        help='Path to a specific image file')
     parser.add_argument('--random', action='store_true',
                         help='Display predictions for random images from the validation folder')
 
