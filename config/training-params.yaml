@@ -1,9 +1,9 @@
 img_size: 416
 batch_size: 16
-epochs: 20
+epochs: 30
 data: config/boat.yaml
 weights: yolov5s.pt
 project: runs/train
-name: boat_exp
+name: boats
 cache: true
-# hyp: config/hyp.yaml
+hyp: config/tuning.yaml
