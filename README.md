@@ -15,8 +15,10 @@ This project was developed by:
 
 ## Setup
 
-1. Clone this repository
-
+1. Clone this repository with submodules
+    ```bash
+    git clone --recurse-submodules git@github.com:kocsismhly/MCoE-boat-detection.git
+    ```
 2. Create a virtual environment
     ```bash
     python -m venv .venv
@@ -115,7 +117,7 @@ This mode displays the detection results for the specified image.
   * Press `q` to quit the program.
 
 ```bash
-python scripts/image-detect.py --image cruise-ship-holidays-cruise-290913.jpg
+python scripts/image-detect.py --image data/boat-dataset/images/val/sailboat-yacht-sea-holidays-water-sailbo-2143219.jpg
 ```
 
 ## Video detection
