@@ -3,7 +3,6 @@ import cv2
 import argparse
 
 model = torch.hub.load('ultralytics/yolov5', 'custom', path='runs/train/boats/weights/best.pt')
-
 class_names = ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat', 'kayak', 'paper boat',
                'sailboat', 'buoy']
 
@@ -69,5 +68,5 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    print('Press \'q\' to quit.')
     detect_boats_in_video(args.video, frame_skip=args.frameskip, resize_width=args.resize)
-    print('Press \'q\' to stop playing the video.')
