@@ -2,7 +2,7 @@ path: ../data/boat-dataset
 train: images/train
 val: images/val
 
-nc: 8
+nc: 9
 names:
   0: cruise ship
   1: ferry boat
