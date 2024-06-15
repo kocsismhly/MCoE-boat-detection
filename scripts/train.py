@@ -1,12 +1,15 @@
 import argparse
 import yaml
 import subprocess
+import os
+import sys
 
 
 def parse_opt():
     parser = argparse.ArgumentParser()
 
-    with open('config/training-params.yaml', 'r') as file:
+    default_params_path = os.path.join('config', 'training-params.yaml')
+    with open(default_params_path, 'r') as file:
         default_params = yaml.safe_load(file)
 
     parser.add_argument('--img-size', type=int, default=default_params['img_size'],
@@ -19,7 +22,7 @@ def parse_opt():
                         help='data configuration path')
     parser.add_argument('--weights', type=str, default=default_params['weights'],
                         help='initial weights path')
-    parser.add_argument('--hyp', type=str, default=default_params.get('hyp', 'config/tuning.yaml'),
+    parser.add_argument('--hyp', type=str, default=default_params['hyp'],
                         help='hyperparameters path')
     parser.add_argument('--project', type=str, default=default_params['project'],
                         help='save results to project/name')
@@ -34,17 +37,15 @@ def parse_opt():
 
 if __name__ == '__main__':
     opt = parse_opt()
-    command = [
-        'python', 'yolov5/train.py',
-        '--img', str(opt.img_size),
-        '--batch', str(opt.batch_size),
-        '--epochs', str(opt.epochs),
-        '--data', opt.data,
-        '--weights', opt.weights,
-        '--hyp', opt.hyp,
-        '--project', opt.project,
-        '--name', opt.name
-    ]
+    command = [sys.executable, 'yolov5/train.py',
+               '--img', str(opt.img_size),
+               '--batch', str(opt.batch_size),
+               '--epochs', str(opt.epochs),
+               '--data', opt.data,
+               '--weights', opt.weights,
+               '--hyp', opt.hyp,
+               '--project', opt.project,
+               '--name', opt.name]
     if opt.cache:
         command.append('--cache')
 

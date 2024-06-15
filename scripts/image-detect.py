@@ -4,9 +4,18 @@ import cv2
 import argparse
 import random
 
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='runs/train/boats/weights/best.pt')
-class_names = ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat', 'kayak', 'paper boat',
-               'sailboat', 'buoy']
+model_path = os.path.join('runs', 'train', 'boats', 'weights', 'best.pt')
+model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
+
+class_names = ['cruise ship',
+               'ferry boat',
+               'freight boat',
+               'gondola',
+               'inflatable boat',
+               'kayak',
+               'paper boat',
+               'sailboat',
+               'buoy']
 
 
 def draw_boxes_cv2(image, results):
@@ -55,7 +64,8 @@ if __name__ == '__main__':
     if args.random:
         print('Press \'space\' to see the next image.')
         print('Press \'q\' to quit.')
-        detect_random_images('data/boat-dataset/images/val')
+        val_images_path = os.path.join('data', 'boat-dataset', 'images', 'val')
+        detect_random_images(val_images_path)
     elif args.image:
         print('Press \'q\' to quit.')
         detect_boats(args.image)

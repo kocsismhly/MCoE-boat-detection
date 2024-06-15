@@ -1,10 +1,20 @@
 import torch
 import cv2
 import argparse
+import os
 
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='runs/train/boats/weights/best.pt')
-class_names = ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat', 'kayak', 'paper boat',
-               'sailboat', 'buoy']
+model_path = os.path.join('runs', 'train', 'boats', 'weights', 'best.pt')
+model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
+
+class_names = ['cruise ship',
+               'ferry boat',
+               'freight boat',
+               'gondola',
+               'inflatable boat',
+               'kayak',
+               'paper boat',
+               'sailboat',
+               'buoy']
 
 
 def draw_boxes_cv2(frame, results):
@@ -61,8 +71,10 @@ def detect_boats_in_video(video_path, frame_skip, resize_width):
 
 
 if __name__ == '__main__':
+    default_video_path = os.path.join('data', 'videos', 'boats.mp4')
+
     parser = argparse.ArgumentParser(description='Detect boats in a video using YOLOv5.')
-    parser.add_argument('--video', type=str, default='data/videos/boats.mp4', help='Path to the video file')
+    parser.add_argument('--video', type=str, default=default_video_path, help='Path to the video file')
     parser.add_argument('--frameskip', type=int, default=1, help='Number of frames to skip')
     parser.add_argument('--resize', type=int, default=640, help='Width to resize the video frames')
 

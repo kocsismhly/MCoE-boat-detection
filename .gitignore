@@ -22,6 +22,17 @@ logs/
 log/
 archive/
 
+# Ignore runs
+runs/*
+yolov5s.pt
+yolov5n.pt
+yolov5m.pt
+
+# Unignore the pre-trained model
+!runs/train/boats/weights/best.pt
+!runs/train/boats/opt.yaml
+!runs/train/boats/results.csv
+
 # Ignore text editor backup and swap files
 *~
 *.swp
