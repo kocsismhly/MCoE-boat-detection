@@ -6,8 +6,6 @@ This project was developed by:
 |:----------:|:---------:|:---------------------------:|
 |   Mihály   |  Kocsis   | kocsismhly at gmail dot com |
 
->> Known issues: [Pre-trained model does not work on Windows](https://github.com/kocsismhly/MCoE-boat-detection/issues/1)
-
 ## Table of Contents
 1. [Setup](#setup)
 2. [Data Preprocessing](#data-preprocessing)
