@@ -2,8 +2,16 @@ import torch
 import cv2
 import argparse
 import os
+from pathlib import Path
+import pathlib
+import platform
 
-model_path = os.path.join('runs', 'train', 'boats', 'weights', 'best.pt')
+if platform.system() == 'Windows':
+    pathlib.PosixPath = pathlib.WindowsPath
+else:
+    pathlib.WindowsPath = pathlib.PosixPath
+
+model_path = Path('runs', 'train', 'boats', 'weights', 'best.pt').as_posix()
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
 
 class_names = ['cruise ship',

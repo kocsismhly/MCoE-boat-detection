@@ -3,12 +3,19 @@ import yaml
 import subprocess
 import os
 import sys
+import pathlib
+import platform
+from pathlib import Path
 
+if platform.system() == 'Windows':
+    pathlib.PosixPath = pathlib.WindowsPath
+else:
+    pathlib.WindowsPath = pathlib.PosixPath
 
 def parse_opt():
     parser = argparse.ArgumentParser()
 
-    default_params_path = os.path.join('config', 'training-params.yaml')
+    default_params_path = Path(os.path.join('config', 'training-params.yaml')).as_posix()
     with open(default_params_path, 'r') as file:
         default_params = yaml.safe_load(file)
 
@@ -18,13 +25,13 @@ def parse_opt():
                         help='batch size')
     parser.add_argument('--epochs', type=int, default=default_params['epochs'],
                         help='number of epochs')
-    parser.add_argument('--data', type=str, default=default_params['data'],
+    parser.add_argument('--data', type=str, default=str(Path(default_params['data']).as_posix()),
                         help='data configuration path')
-    parser.add_argument('--weights', type=str, default=default_params['weights'],
+    parser.add_argument('--weights', type=str, default=str(Path(default_params['weights']).as_posix()),
                         help='initial weights path')
-    parser.add_argument('--hyp', type=str, default=default_params['hyp'],
+    parser.add_argument('--hyp', type=str, default=str(Path(default_params['hyp']).as_posix()),
                         help='hyperparameters path')
-    parser.add_argument('--project', type=str, default=default_params['project'],
+    parser.add_argument('--project', type=str, default=str(Path(default_params['project']).as_posix()),
                         help='save results to project/name')
     parser.add_argument('--name', type=str, default=default_params['name'],
                         help='save results to project/name')
@@ -37,14 +44,14 @@ def parse_opt():
 
 if __name__ == '__main__':
     opt = parse_opt()
-    command = [sys.executable, 'yolov5/train.py',
+    command = [sys.executable, str(Path('yolov5', 'train.py').as_posix()),
                '--img', str(opt.img_size),
                '--batch', str(opt.batch_size),
                '--epochs', str(opt.epochs),
-               '--data', opt.data,
-               '--weights', opt.weights,
-               '--hyp', opt.hyp,
-               '--project', opt.project,
+               '--data', str(Path(opt.data).as_posix()),
+               '--weights', str(Path(opt.weights).as_posix()),
+               '--hyp', str(Path(opt.hyp).as_posix()),
+               '--project', str(Path(opt.project).as_posix()),
                '--name', opt.name]
     if opt.cache:
         command.append('--cache')

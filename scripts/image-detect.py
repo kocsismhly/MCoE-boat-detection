@@ -1,21 +1,22 @@
+import pathlib
 import torch
 import os
 import cv2
-import argparse
+import argparse4
 import random
+from pathlib import Path
+import platform
 
-model_path = os.path.join('runs', 'train', 'boats', 'weights', 'best.pt')
+if platform.system() == 'Windows':
+    pathlib.PosixPath = pathlib.WindowsPath
+else:
+    pathlib.WindowsPath = pathlib.PosixPath
+
+model_path = Path('runs', 'train', 'boats', 'weights', 'best.pt').as_posix()
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
 
-class_names = ['cruise ship',
-               'ferry boat',
-               'freight boat',
-               'gondola',
-               'inflatable boat',
-               'kayak',
-               'paper boat',
-               'sailboat',
-               'buoy']
+class_names = ['cruise ship', 'ferry boat', 'freight boat', 'gondola', 'inflatable boat',
+               'kayak', 'paper boat', 'sailboat', 'buoy']
 
 
 def draw_boxes_cv2(image, results):
